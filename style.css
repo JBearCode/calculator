@@ -36,11 +36,13 @@ html {
     border-radius: 3px;
     border: 1px solid lightgrey;
     font-size: 2rem;
+    outline: none;
   }
 
   button:hover {
       border-color: black;
-      background-color:lightgrey;
+      filter: brightness(92%);
+      font-size: 2.2rem;
   }
   
   .key-div {
@@ -48,4 +50,24 @@ html {
       grid-template-columns: repeat(4, 1fr);
       grid-gap: 20px;
       padding: 20px;
+  }
+
+  #all-clear {
+      grid-column: 1 / 5;
+  }
+
+  #equals {
+      grid-column: 3 / 5;
+  }
+
+  .gold {
+      background-color: #FFD166;
+  }
+
+  .green {
+      background-color: #06D6A0;
+  }
+
+  .red {
+      background-color: #EF476F;
   }
