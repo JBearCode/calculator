@@ -39,5 +39,13 @@ html {
   }
 
   button:hover {
-      background-color: black;
+      border-color: black;
+      background-color:lightgrey;
+  }
+  
+  .key-div {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 20px;
+      padding: 20px;
   }
