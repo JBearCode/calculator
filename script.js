@@ -1,8 +1,13 @@
-const screen = document.getElementById('screen');
+const calculator = {
+    displayValue: '0',
+    firstOperand: null,
+    waitingForSecondOperand: false,
+    operator: null,
+  };
 
-function operate(operator, num1, num2) {
-    let newDisplayValue = operator(num1, num2);
-    screen.value = newDisplayValue;
+function updateDisplay() {
+    const display = document.getElementById('screen');
+    display.value = calculator.displayValue;
 }
 
 function add(num1, num2) {
