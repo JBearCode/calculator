@@ -77,6 +77,12 @@ keys.addEventListener('click', (event) => {
       return;
     }
   
-    console.log('digit', target.value);
+    inputNumber(target.value);
+    updateDisplay();
   });
+
+  function inputNumber(num) {
+      const { displayValue } = calculator;
+      calculator.displayValue = displayValue == '0' ? num : displayValue + num;
+  }
 
