@@ -48,3 +48,35 @@ function root(num) {
     } else return Math.sqrt(num);
 }
 
+const keys = document.querySelector('.key-div');
+
+keys.addEventListener('click', (event) => {
+    const { target } = event;
+  
+    if (!target.matches('button')) {
+      return;
+    }
+  
+    if (target.classList.contains('immediate-operator')) {
+      console.log('immediate-operator', target.value);
+      return;
+    }
+
+    if (target.classList.contains('delayed-operator')) {
+        console.log('delayed-operator', target.value);
+        return;
+      }
+  
+    if (target.classList.contains('decimal')) {
+      console.log('decimal', target.value);
+      return;
+    }
+  
+    if (target.classList.contains('all-clear')) {
+      console.log('clear', target.value);
+      return;
+    }
+  
+    console.log('digit', target.value);
+  });
+
