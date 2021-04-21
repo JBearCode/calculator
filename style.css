@@ -18,7 +18,7 @@ html {
     width: 400px;
 }
 
-.screen {
+#screen {
     width: 100%;
     font-size: 5rem;
     height: 80px;

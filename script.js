@@ -1,4 +1,8 @@
-// import JS math functions from earlier exercise I did
+const screen = document.getElementById('screen');
+
+function operate(operator, num1, num2) {
+    return operator(num1, num2);
+}
 
 function add(num1, num2) {
 	return parseInt(num1, 10) + parseInt(num2, 10);
@@ -13,7 +17,9 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
-    return num1 / num2;
+    if (num2 == 0) {
+        return;
+    } else return num1 / num2;
 }
 
 function negate(num) {
