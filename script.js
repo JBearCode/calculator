@@ -1,51 +1,38 @@
 // import JS math functions from earlier exercise I did
 
-function add (num1, num2) {
+function add(num1, num2) {
 	return parseInt(num1, 10) + parseInt(num2, 10);
 }
 
-function subtract (num1, num2) {
+function subtract(num1, num2) {
 	return num1 - num2;
 }
 
-function sum (input) {
-	let total = 0;
-	if (toString.call(input) !== "[object Array]") {
-		return total;
-	}
-
-	for (let i = 0; i < input.length; i++) {
-		if(isNaN(input[i])) {
-			continue;
-		}
-		total += Number(input[i]);
-	}
-	return total;
+function multiply(num1, num2) {
+    return num1 * num2;
 }
 
-function multiply (input) {
-	let total = 0;
-	if (toString.call(input) !== "[object Array]") {
-		return total;
-	}
-	total = 1;
-	for (let i = 0; i < input.length; i++) {
-		if(isNaN(input[i])) {
-			continue;
-		}
-		total *= Number(input[i]);
-	}
-	return total;
+function divide(num1, num2) {
+    return num1 / num2;
 }
 
-function power(num, exp) {
-	return num ** exp;
+function negate(num) {
+    if (num == 0) {
+        return;
+    } else if (num < 0) {
+        return Math.abs(num);
+    } else if (num > 0) {
+        return -Math.abs(num);
+    }
 }
 
-function factorial(num) {
-	if (num == 0) {
-		return 1;
-	} else {
-		return num * factorial(num - 1);
-	}
+function square(num) {
+	return num * num;
 }
+
+function root(num) {
+    if (num < 0) {
+        return;
+    } else return Math.sqrt(num);
+}
+
