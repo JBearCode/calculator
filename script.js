@@ -50,8 +50,8 @@ function root(num) {
 
 const keys = document.querySelector('.key-div');
 
-keys.addEventListener('click', (event) => {
-    const { target } = event;
+keys.addEventListener('click', (e) => {
+    const { target } = e;
   
     if (!target.matches('button')) {
       return;
@@ -59,15 +59,15 @@ keys.addEventListener('click', (event) => {
   
     if (target.classList.contains('immediate-operator')) {
       console.log('immediate-operator', target.value);
-      respondToOperator(target.value);
+      respondToImmediateOperator(target.value);
       updateDisplay();
       return;
     }
 
-    if (target.classList.contains('delayed-operator')) {
+    if (target.classList.contains('operator')) {
         respondToOperator(target.value);
         updateDisplay();
-        console.log('delayed-operator', target.value);
+        console.log('operator', target.value);
         return;
       }
   
@@ -102,13 +102,19 @@ keys.addEventListener('click', (event) => {
     }
 
   function inputDot(dot) {
-      if (!calculator.displayValue.includes(dot)) {
+    if (calculator.waitingForSecondOperand === true) {
+        calculator.displayValue = '0.'
+      calculator.waitingForSecondOperand = false;
+      return;
+    }
+
+    if (!calculator.displayValue.includes(dot)) {
           calculator.displayValue += dot;
-      }
+    }
   }
 
   function respondToOperator(nextOperator) {
-    const { firstOperand, displayValue, operator } = calculator
+    const { firstOperand, displayValue, operator } = calculator;
     const inputValue = parseFloat(displayValue);
 
     if (operator && calculator.waitingForSecondOperand)  {
@@ -129,6 +135,22 @@ keys.addEventListener('click', (event) => {
     calculator.waitingForSecondOperand = true;
     calculator.operator = nextOperator;
     console.log(calculator);
+  }
+
+  function respondToImmediateOperator(immOperator) {
+    const { firstOperand, displayValue, operator } = calculator;
+    const inputValue = parseFloat(displayValue);
+
+    if (immOperator === 'negate' && displayValue < 0) {
+        calculator.displayValue = String(Math.abs(calculator.displayValue));
+    } else if (immOperator === 'negate' && displayValue > 0) {
+        calculator.displayValue = String(-Math.abs(calculator.displayValue));
+    } else if (immOperator === 'root') {
+        calculator.displayValue = String(Math.sqrt(calculator.displayValue));
+    } else if (immOperator === 'square') {
+        calculator.displayValue = String(Math.pow(calculator.displayValue, 2))
+    }
+    updateDisplay();
   }
 
   function calculate(firstOperand, secondOperand, operator) {
