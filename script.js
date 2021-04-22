@@ -59,16 +59,21 @@ keys.addEventListener('click', (event) => {
   
     if (target.classList.contains('immediate-operator')) {
       console.log('immediate-operator', target.value);
+      respondToOperator(target.value);
+      updateDisplay();
       return;
     }
 
     if (target.classList.contains('delayed-operator')) {
+        respondToOperator(target.value);
+        updateDisplay();
         console.log('delayed-operator', target.value);
         return;
       }
   
     if (target.classList.contains('decimal')) {
-      console.log('decimal', target.value);
+      inputDot(target.value);
+      updateDisplay();
       return;
     }
   
@@ -82,7 +87,52 @@ keys.addEventListener('click', (event) => {
   });
 
   function inputNumber(num) {
-      const { displayValue } = calculator;
-      calculator.displayValue = displayValue == '0' ? num : displayValue + num;
+      const { displayValue, waitingForSecondOperand } = calculator;
+
+      if (waitingForSecondOperand === true) {
+        calculator.displayValue = num;
+        calculator.waitingForSecondOperand = false;
+      } else {
+        calculator.displayValue = displayValue === '0' ? num : displayValue + num;
+      }
+    
+      console.log(calculator);
+    }
+
+  function inputDot(dot) {
+      if (!calculator.displayValue.includes(dot)) {
+          calculator.displayValue += dot;
+      }
   }
 
+  function respondToOperator(nextOperator) {
+    const { firstOperand, displayValue, operator } = calculator
+    const inputValue = parseFloat(displayValue);
+
+    if (firstOperand === null && !isNaN(inputValue)) {
+      calculator.firstOperand = inputValue;
+    } else if (operator) {
+      const finalCalculation = calculate(firstOperand, inputValue, operator);
+
+      calculator.displayValue = String(finalCalculation);
+      calculator.firstOperand = finalCalculation;
+    }
+  
+    calculator.waitingForSecondOperand = true;
+    calculator.operator = nextOperator;
+    console.log(calculator);
+  }
+
+  function calculate(firstOperand, secondOperand, operator) {
+    if (operator === '+') {
+      return firstOperand + secondOperand;
+    } else if (operator === '−') {
+      return firstOperand - secondOperand;
+    } else if (operator === '*') {
+      return firstOperand * secondOperand;
+    } else if (operator === '/') {
+      return firstOperand / secondOperand;
+    }
+  
+    return secondOperand;
+  }
