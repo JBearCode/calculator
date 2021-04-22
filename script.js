@@ -127,8 +127,8 @@ keys.addEventListener('click', (e) => {
       calculator.firstOperand = inputValue;
     } else if (operator) {
       const finalCalculation = calculate(firstOperand, inputValue, operator);
+      calculator.displayValue = `${parseFloat(finalCalculation.toFixed(5))}`;
 
-      calculator.displayValue = String(finalCalculation);
       calculator.firstOperand = finalCalculation;
     }
   
@@ -139,7 +139,6 @@ keys.addEventListener('click', (e) => {
 
   function respondToImmediateOperator(immOperator) {
     const { firstOperand, displayValue, operator } = calculator;
-    const inputValue = parseFloat(displayValue);
 
     if (immOperator === 'negate' && displayValue < 0) {
         calculator.displayValue = String(Math.abs(calculator.displayValue));
@@ -148,9 +147,8 @@ keys.addEventListener('click', (e) => {
     } else if (immOperator === 'root') {
         calculator.displayValue = String(Math.sqrt(calculator.displayValue));
     } else if (immOperator === 'square') {
-        calculator.displayValue = String(Math.pow(calculator.displayValue, 2))
+        calculator.displayValue = String(Math.pow(calculator.displayValue, 2));
     }
-    updateDisplay();
   }
 
   function calculate(firstOperand, secondOperand, operator) {
