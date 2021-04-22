@@ -139,15 +139,20 @@ keys.addEventListener('click', (e) => {
 
   function respondToImmediateOperator(immOperator) {
     const { firstOperand, displayValue, operator } = calculator;
+    let mathResult;
 
     if (immOperator === 'negate' && displayValue < 0) {
-        calculator.displayValue = String(Math.abs(calculator.displayValue));
+        mathResult = String(Math.abs(calculator.displayValue));
+        calculator.displayValue = mathResult;
     } else if (immOperator === 'negate' && displayValue > 0) {
-        calculator.displayValue = String(-Math.abs(calculator.displayValue));
-    } else if (immOperator === 'root') {
-        calculator.displayValue = String(Math.sqrt(calculator.displayValue));
+        mathResult = String(-Math.abs(calculator.displayValue));
+        calculator.displayValue = mathResult;
+    } else if (immOperator === 'root' && displayValue > 0) {
+        mathResult = String(Math.sqrt(calculator.displayValue));
+        calculator.displayValue = mathResult;
     } else if (immOperator === 'square') {
-        calculator.displayValue = String(Math.pow(calculator.displayValue, 2));
+        mathResult = String(Math.pow(calculator.displayValue, 2));
+        calculator.displayValue = mathResult;
     }
   }
 
