@@ -79,6 +79,8 @@ keys.addEventListener('click', (event) => {
   
     if (target.classList.contains('all-clear')) {
       console.log('clear', target.value);
+      clearAll();
+      updateDisplay();
       return;
     }
   
@@ -109,6 +111,12 @@ keys.addEventListener('click', (event) => {
     const { firstOperand, displayValue, operator } = calculator
     const inputValue = parseFloat(displayValue);
 
+    if (operator && calculator.waitingForSecondOperand)  {
+        calculator.operator = nextOperator;
+        console.log(calculator);
+        return;
+      }
+
     if (firstOperand === null && !isNaN(inputValue)) {
       calculator.firstOperand = inputValue;
     } else if (operator) {
@@ -135,4 +143,12 @@ keys.addEventListener('click', (event) => {
     }
   
     return secondOperand;
+  }
+
+  function clearAll() {
+    calculator.displayValue = '0';
+    calculator.firstOperand = null;
+    calculator.waitingForSecondOperand = false;
+    calculator.operator = null;
+    console.log(calculator);
   }
